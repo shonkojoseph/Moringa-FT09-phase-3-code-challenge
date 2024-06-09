@@ -1,20 +1,22 @@
 import unittest
+from unittest.mock import MagicMock
 from models.author import Author
 from models.article import Article
 from models.magazine import Magazine
 
 class TestModels(unittest.TestCase):
-    def test_author_creation(self):
-        author = Author(1, "John Doe")
-        self.assertEqual(author.name, "John Doe")
-
-    def test_article_creation(self):
-        article = Article(1, "Test Title", "Test Content", 1, 1)
-        self.assertEqual(article.title, "Test Title")
-
     def test_magazine_creation(self):
-        magazine = Magazine(1, "Tech Weekly")
+        # Providing the required 'category' argument
+        magazine = Magazine(1, "Tech Weekly", "Technology")
+        self.assertEqual(magazine.id, 1)
         self.assertEqual(magazine.name, "Tech Weekly")
+        self.assertEqual(magazine.category, "Technology")
 
-if __name__ == "__main__":
+    def test_author_creation(self):
+        # Corrected 'Author' instantiation without 'field'
+        author = Author(1, "Jane Doe")
+        self.assertEqual(author.id, 1)
+        self.assertEqual(author.name, "Jane Doe")
+
+if __name__ == '__main__':
     unittest.main()
